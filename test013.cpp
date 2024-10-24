@@ -2,7 +2,7 @@
 #include <fstream>
 #include <iomanip>
 #include <windows.h>
-
+#include <iterator>
 
 void func001()
 {
@@ -93,10 +93,105 @@ void func003()
     }
 }
 
+void func004()
+{
+    int i, k;
+    ofstream out("test05.dat", ios_base::binary);
+
+    for(i = 0; i < 1000; i++) out.write((char *) &i, sizeof(int));
+    out.close();
+
+    ifstream in("test05.dat", ios_base::binary);
+
+    while (in.read((char *) &k, sizeof(int)))
+    {
+        cout << k << endl;
+        in.seekg(99 * sizeof(int), ios_base::cur);
+    }
+    in.close();
+}
+
+void func00500()
+{
+    ofstream file("numberic.dat", ios_base::binary);
+    for(int i = 0; i < 100; i++) file.write((char *) &i, sizeof(i));
+    file.close();
+}
+
+void func005()
+{
+    fstream in_out("numeric.dat", ios_base::in | ios_base::out | ios_base::binary);
+    if(in_out.is_open())
+    {
+        int k = 0;
+        for(unsigned int pos = 0; in_out.seekg(pos, ios_base::beg); pos += sizeof(int))
+        {
+            if (!in_out.read((char*)&k, sizeof(int))) break;
+            k += 100;
+            if (!in_out.seekp(pos, ios_base::beg)) break;
+            in_out.write((char*) &k, sizeof(int));
+        }
+        in_out.close();
+    }
+}
+
+void func006()
+{
+    setlocale(LC_CTYPE, "");
+    ifstream in("test.txt");
+    cout << in.rdbuf();
+    //in.close();
+
+    ofstream out ("copy.txt");
+    out << in.rdbuf();
+    //out.close();
+}
+
+void func007()
+{
+    char ch;
+    ifstream in("t.txt");
+    filebuf *buf = in.rdbuf();
+
+    while ((ch = buf -> sbumpc()) != EOF) cout << ch;
+
+}
+
+void func008()
+{
+    int i;
+    char buf[] = "text";
+    ostreambuf_iterator<char> it(cout);
+    for(i = 0; buf[i]; i++) *it = buf[i];
+    *it = '\n';
+
+    ostreambuf_iterator<char> iter(cout.rdbuf());
+
+    for(i = 0; i < 10; i++) *iter = i + '0', *iter = ' ';
+    *iter = '\n';
+
+    ifstream file("test.txt");
+
+    if(file.is_open())
+    {
+        setlocale(LC_CTYPE, "");
+        istreambuf_iterator<char> end_it, input_it(file);
+        while(input_it != end_it) *it = *input_it++;
+    }
+
+}
+
+
 int main()
 {
     //func001();
     //func002();
-    func003();
+    //func003();
+    //func004();
+    //func00500();
+    //func005();
 
+    //func006();
+    //func007();
+    func008();
 }
