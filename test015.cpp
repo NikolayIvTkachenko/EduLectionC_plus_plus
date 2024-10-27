@@ -3,6 +3,8 @@
 #include <array>
 #include <vector>
 
+#include <windows.h>
+
 using namespace std;
 
 
@@ -110,6 +112,71 @@ void func006()
     cout << "max elements = " << *p << endl;
 }
 
+// void func007()
+// {
+//     vector<int> q = { 2, 6, 4 };
+//     auto p = search(v.cbegin(), v.cend(). q.begin(), q.end());
+//     cout << " Position inclided fragment = " << p - v.cbegin() << endl;
+// }
+
+void func008()
+{
+    vector<int> v = { 4, 7, 1, 1,  6, 8, 2, 6, 4, 9, 3  };
+    for (auto e : v) cout << e << '\t';
+    auto p = adjacent_find(v.cbegin(), v.cend());
+    cout << "\nPosition 1,1 = " << p - v.cbegin() << endl;
+
+}
+
+
+void func009()
+{
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    char str[256], lim[] = "., \t";
+    char *p = NULL, *q, *endStr, *begStr;
+
+    cout << "Input string for analisys: ";
+    cin.getline(str, 256);
+    begStr = str;
+    endStr = str + strlen(str);
+
+    while (p < endStr)
+    {
+        p = find_first_of(begStr, endStr, lim, lim + 4);
+        for (q = begStr; q < p; ++q) cout << *q; cout << endl;
+        begStr = ++q;
+    }
+
+}
+
+void func010()
+{
+    vector<int> v;
+    for (int i = 0; i < 10; ++i) v.push_back(i);
+    for_each(v.begin(), v.end(), [](int& elem) { 
+        elem *= 2; 
+        cout << elem << '\t';
+    });
+    cout << endl;
+    cout << "count(6) = " << count(v.cbegin(), v.cend(), 6) << endl;
+
+    setlocale(LC_CTYPE, "");
+    pair<vector<int>::const_iterator, vector<int>::const_iterator> val;
+    vector<int> q(v);
+    q.insert(q.cbegin() + 2, -1);
+    for_each(q.cbegin(), q.cend(), [](int elem){
+        cout << elem << '\t';
+    });
+
+    val = mismatch(v.cbegin(), v.cend(), q.cbegin());
+    
+    cout << "\nPosition in v = " << val.first - v.cbegin();
+    cout << "\nPosition in q = " << val.second - q.cbegin() << endl;
+
+}
+
+
 int main()
 {
     //func001();
@@ -117,6 +184,10 @@ int main()
     //func003();
     //func004();
     //func005();
-    func006();
+    //func006();
+    //func007();
+    //func008();
+    //func009();
+    func010();
 
 }
