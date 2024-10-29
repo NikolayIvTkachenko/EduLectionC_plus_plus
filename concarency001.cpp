@@ -6,14 +6,14 @@
 
 using namespace std;
 
-void hello()
+void test()
 {
     std::cout << "Hello Concurrent Word\n";
 }
 
 void func001()
 {
-    thread t(hello);
+    thread t(test);
     t.join();
 }
 
