@@ -211,9 +211,166 @@ void func006_trabsponir_Matrix()
             cin >> a[i][j];
         }
     cout << "\nSource matrix: \n";
-        
+    for(i = 0; i < r; ++i)
+        for(j = 0; j < c; ++j)
+        {
+            cout << a[i][j] << " ";
+            if(j == c - 1) cout << "\n\n";
+        }
+
+    for( i = 0; i < r; ++i)
+        for(j = 0; j < c; ++j)
+        {
+            transpose[j][i] = a[i][j];
+        }
+
+    cout << "\nTransposed matrix: \n";
+    for( i = 0; i < r; ++i)
+        for( j = 0; j < c; ++j)
+        {
+            cout << transpose[i][j] << " ";
+            if(j == r-1) cout << "\n\n";
+        }
+    cout << endl;    
+}
 
 
+void enterData(int firstMatrix[][10], int secondMatrix[][10], int rowFirst, int columnFirst, int rowSecond, int columnSecond);
+void multiplyMatrices(int firstMatrix[][10], int secondMatrix[][10], int multResult[][10], int rowFirst, int columnFirst, int rowSecond, int columnSecond);
+void display(int mult[][10], int rowFirst, int columnSecond);
+
+void func007_Multiple_Matrix()
+{
+    int firstMatrix[10][10], secondMatrix[10][10], mult[10][10], rowFirst, columnFirst, rowSecond, columnSecond, i, k, j;
+
+    cout << "Input rows and column of the First matrix: ";
+    cin >> rowFirst >> columnFirst;
+
+    cout << "Input rows and columns of the second matrix: ";
+    cin >> rowSecond >> columnSecond;
+
+    while (columnFirst != rowSecond)
+    {
+        cout << "Error! Quantity of columns of the first matrix no equal the quantity rows of the seconds matrix";
+
+        cout << "Quantity rows and columns in the first matrix: ";
+        cin >> rowFirst >> columnFirst;
+
+        cout << "Quantity rows and columns in the seconds matrix: ";
+        cin >> rowSecond >> columnSecond;
+    }
+
+    enterData(firstMatrix, secondMatrix, rowFirst, columnFirst, rowSecond, columnSecond);
+
+    multiplyMatrices(firstMatrix, secondMatrix, mult, rowFirst, columnFirst, rowSecond, columnSecond);
+
+    display(mult, rowFirst, columnSecond);
+}
+
+void enterData(int firstMatrix[][10], int secondMatrix[][10], int rowFirst, int columnFirst, int rowSecond, int columnSecond)
+{
+    int i, j;
+    cout << endl << "Input elements of matrix 1: " << endl;
+
+    for( i = 0; i < rowFirst; ++i)
+    {
+        for(j = 0; j < columnFirst; ++j)
+        {
+            cout << "Input element a" << i + 1 << j + 1 << " : ";
+            cin >> firstMatrix[i][j];
+        }
+    }
+
+        for( i = 0; i < rowSecond; ++i)
+    {
+        for(j = 0; j < columnSecond; ++j)
+        {
+            cout << "Input element b" << i + 1 << j + 1 << " : ";
+            cin >> secondMatrix[i][j];
+        }
+    }
+
+
+
+}
+
+void multiplyMatrices(int firstMatrix[][10], int secondMatrix[][10], int multResult[][10], int rowFirst, int columnFirst, int rowSecond, int columnSecond)
+{
+    int i, j, k;
+    for( i = 0; i < rowFirst; ++i)
+        for(j = 0; j < columnSecond; ++j)
+        {
+            multResult[i][j] = 0;
+        }
+
+    for( i = 0; i < rowFirst; ++i)
+    {
+        for(j = 0; j < columnSecond; ++j)
+        {
+            for(k = 0; k < columnFirst; ++k)
+            {
+                multResult[i][j] += firstMatrix[i][k] * secondMatrix[k][j];
+            }
+        }
+    }    
+}
+
+
+void display(int multResult[][10], int rowFirst, int columnSecond)
+{
+    int i, j;
+
+    cout << "Result multiply of matrix: " << endl;
+    for( i = 0; i < rowFirst; ++i)
+    {
+        for(j = 0; j < columnSecond; ++j)
+        {
+            cout << multResult[i][j] << " ";
+            if(j == columnSecond - 1)
+                cout << endl << endl;
+        }
+    }
+}
+
+//Доступ к элементам массива с использованием указателей
+void func008_pointer_access()
+{
+    int data[5];
+    cout << "Input elements: ";
+
+    for(int i = 0; i < 5; ++i)
+        cin >> data[i];
+
+    cout << "You inputed: ";
+    for(int i = 0; i < 5; ++i)
+        cout << endl << *(data + i);
+    cout << endl;
+}
+
+
+void cyclicSwap(int *a, int *b, int *c);
+//Своп числа в циклическом порядке с помощью вызова по ссылке
+void func009_swap_numbers()
+{
+    int a, b, c;
+    cout << "Input values a, b, c: ";
+    cin >> a >> b >> c;
+
+    cout << "Value before change: " << endl;
+    cout << "a, b, c respectively: " << a << ", " << b << ", " << c << endl;
+    cyclicSwap(&a, &b, &c);
+
+    cout << "After change: " << endl;
+    cout << "a, b, c respectively: " << a << ", " << b << ", " << c << endl;
+}
+
+void cyclicSwap(int *a, int *b, int *c)
+{
+    int temp;
+    temp = *b;
+    *b = *a;
+    *a = *c;
+    *c = temp;
 }
 
 
@@ -224,8 +381,10 @@ int main()
     //func003_SD();
     //func004_matrix_add();
     //func005_multiplication_matrix();
-    func006_trabsponir_Matrix();
-
-
+    //func006_trabsponir_Matrix();
+    //func007_Multiple_Matrix();
+    //func008_pointer_access();
+    func009_swap_numbers();
+    
     return 0;
 }
