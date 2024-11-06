@@ -31,6 +31,7 @@ void fun001()
     }
 
     ifilet.open(fname3, ios_base::binary | ios_base::out);
+    
     if(!ifilet)
     {
         perror("Error when create result file\n");

@@ -12,7 +12,8 @@ using namespace user;
 int main()
 {
 
-    setlocale(LC_CTYPE, "");
+    //setlocale(LC_CTYPE, "");
+    setlocale(LC_ALL, "RU");
     int mm1;
 
     k = 10;
