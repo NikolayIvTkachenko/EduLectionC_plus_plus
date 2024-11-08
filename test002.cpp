@@ -10,7 +10,7 @@ int main()
     i = j + k;
 
     cout <<"\nj+k=" << i << endl;
-    ch = h +1;
+    ch = h + 1;
     cout << h << '\t' << ch << endl;
 
     cout << "\npi= " << pi << endl;
