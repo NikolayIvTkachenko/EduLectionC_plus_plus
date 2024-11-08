@@ -33,8 +33,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/Project/ProjectsC++/edu001/algorithms",
-      "program": "d:/Project/ProjectsC++/edu001/algorithms/build/Debug/outDebug",
+      "cwd": "d:/Project/ProjectsC++/edu001/algorithm_train",
+      "program": "d:/Project/ProjectsC++/edu001/algorithm_train/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
